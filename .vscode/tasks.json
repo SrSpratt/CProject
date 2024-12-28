@@ -1,0 +1,52 @@
+{
+    "version": "2.0.0",
+    "tasks":[
+        {
+            "label": "mkbuild",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "If (-Not (Test-Path 'Build')) {New-Item -ItemType Directory -Path 'Build'}"
+            ]
+        },
+        {
+        "label": "build",
+        "type": "shell",
+        "command": "gcc",
+        "args":[
+            "-I",
+            "Libs",
+            "Application/*.c",
+            "*.c",
+            "-o",
+            "Build/program.exe"
+        ],
+        "group":{
+            "kind": "build",
+            "isDefault": false
+        },
+        "options":{
+            "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Build the application",
+        "dependsOn":[
+            "mkbuild"
+        ]
+    },
+    {
+        "label": "Compile&Run",
+        "type": "shell",
+        "command": "./Build/program.exe",
+        "group":{
+            "kind": "build",
+            "isDefault": true
+        },
+        "dependsOn":[
+            "build"
+        ],
+        "detail": "Compile & Run the application"
+    }
+    ]
+}
