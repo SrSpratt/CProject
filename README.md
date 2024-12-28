@@ -1,2 +1,2 @@
 # CProject
-Design for C studying
+## Designed for studying C on Windows
