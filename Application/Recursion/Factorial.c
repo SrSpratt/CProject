@@ -1,4 +1,4 @@
-#include<Recursion/Factorial.h>
+#include<Recursion/Operations.h>
 
 long unsigned Factorial(int n){
     if (n < 0)

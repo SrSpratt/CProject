@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<General/program.h>
 #include<Formatting.h>
-#include<Recursion/Factorial.h>
+#include<Recursion/Operations.h>
 
 #define PRINTBREAK printf("\n")
 
@@ -17,18 +17,26 @@ void program(){
 
 void menu(){
     short menuController = 0;
-    char* optionsName[] = {"Factorial", "Factorial"};
-    function_t functions[] = {Factorial, Factorial}; 
+    char* optionsName[] = {"Addition", "Multiplication"};
+    function_binary* functions[] = {Addition, Multiplication}; 
     short numberOfOptions = sizeof(optionsName) / sizeof(optionsName[0]);
+
+    short operandA = 0;
+    short operandB = 0;
     do {
-        printf("%d", numberOfOptions);
-        PRINTBREAK;
         menuPrinter(numberOfOptions, optionsName);
         scanf("%d", &menuController);
         PRINTBREAK;
         if (menuController > 0 && menuController < numberOfOptions + 1){
-            function_t selectedFunction = optionChooser(menuController, functions);
-            printf("A resposta é: %d", selectedFunction(1));
+            printf("Insira o primeiro operando:");
+            scanf("%hd", &operandA);
+            printf("Insira o segundo operando:");
+            scanf("%hd", &operandB);
+            printf("%d\n%d\n", operandA, operandB);
+            if (operandA != 0 && operandB != 0){
+                function_binary* selectedFunction = optionChooserBinary(menuController, functions);
+                printf("A resposta é: %d", selectedFunction(operandA, operandB));
+            }
         }
         PRINTBREAK;
     } while (menuController != 0);
@@ -41,8 +49,16 @@ void menuPrinter(short numberOfOptions, char* optionsName[]){ // J'ai seulement 
         printf("%d \b. %s", i+1, optionsName[i]);
         PRINTBREAK;
     }
+    printf("0. Sair");
+    PRINTBREAK;
 }
 
-function_t optionChooser(short chosenOption, function_t functions[]){
+function_unary* optionChooserUnary(short chosenOption, function_unary* functions[]){
     return functions[chosenOption-1];
 }
+
+function_binary* optionChooserBinary(short chosenOption, function_binary* functions[]){
+    return functions[chosenOption-1];
+}
+
+

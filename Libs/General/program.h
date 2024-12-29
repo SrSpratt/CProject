@@ -5,6 +5,7 @@
 void program();
 void menu();
 void menuPrinter(short, char**);
-function_t optionChooser(short, function_t functions[]);
+function_unary* optionChooserUnary(short, function_unary**);
+function_binary* optionChooserBinary(short, function_binary**);
 
 #endif
